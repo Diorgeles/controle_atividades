@@ -69,3 +69,6 @@ api-docs/
 .vscode/ipch/
 .vscode/settings.json
 *.pyc
+
+.venv
+.idea
