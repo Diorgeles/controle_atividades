@@ -67,3 +67,5 @@ api-docs/
 .DS_Store
 
 .vscode/ipch/
+.vscode/settings.json
+*.pyc
