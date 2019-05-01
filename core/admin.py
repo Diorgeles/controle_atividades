@@ -3,7 +3,7 @@ from .models import Pergunta, Resposta, Categoria, Aluno
 
 
 class AlunoAdmin(admin.ModelAdmin):
-    list_display = ('matricula', 'nome', 'telefone', 'nota', 'p_acertos', 'aula')
+    list_display = ('matricula', 'nome', 'telefone', 'nota', 'porcentagem_acertos', 'aula')
 
 
 class RespostaAdmin(admin.ModelAdmin):
@@ -15,7 +15,7 @@ class PerguntaAdmin(admin.ModelAdmin):
 
 
 class CategoriaAdmin(admin.ModelAdmin):
-    list_display = ('cat',)
+    list_display = ('categoria',)
 
 admin.site.register(Aluno, AlunoAdmin)
 admin.site.register(Pergunta, PerguntaAdmin)
