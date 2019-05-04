@@ -38,19 +38,6 @@ PROJECT_APPS = [
 
 THIRD_PARTY_APPS = [
     'auditlog',
-    'rest_framework',
-    'django_extensions',
-    'django_tables2',
-    'crispy_forms',
-    'dal',
-    'dal_select2',
-    'django_swiss_knife',
-    'bootstrap3_datetime',
-    'compressor',
-    'static_precompiler',
-    'django_bootstrap_breadcrumbs',
-    'wkhtmltopdf',
-    'django_filters',
 ]
 
 CORE_APPS = [
