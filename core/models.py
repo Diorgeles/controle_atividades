@@ -1,7 +1,8 @@
 from django.db import models
+from model_utils.models import SoftDeletableModel, TimeStampedModel
 
 
-class Aluno(models.Model):
+class Aluno(SoftDeletableModel, TimeStampedModel):
 
     matricula = models.IntegerField()
     nome = models.CharField(max_length=100)
@@ -14,7 +15,7 @@ class Aluno(models.Model):
         return self.nome
 
 
-class Categoria(models.Model):
+class Categoria(SoftDeletableModel, TimeStampedModel):
 
     categoria = models.IntegerField()
 
@@ -22,7 +23,7 @@ class Categoria(models.Model):
         return str(self.cat)
 
 
-class Pergunta(models.Model):
+class Pergunta(SoftDeletableModel, TimeStampedModel):
 
     perg = models.TextField()
     aula = models.ForeignKey(Categoria, on_delete=models.CASCADE)
@@ -31,7 +32,7 @@ class Pergunta(models.Model):
         return self.perg
 
 
-class Resposta(models.Model):
+class Resposta(SoftDeletableModel, TimeStampedModel):
 
     alternativa = models.TextField()
     opcao = models.CharField(max_length=1)

@@ -30,14 +30,36 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+
+PROJECT_APPS = [
+    'core',
+]
+
+
+THIRD_PARTY_APPS = [
+    'auditlog',
+    'rest_framework',
+    'django_extensions',
+    'django_tables2',
+    'crispy_forms',
+    'dal',
+    'dal_select2',
+    'django_swiss_knife',
+    'bootstrap3_datetime',
+    'compressor',
+    'static_precompiler',
+    'django_bootstrap_breadcrumbs',
+    'wkhtmltopdf',
+    'django_filters',
+]
+
+CORE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +71,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+INSTALLED_APPS = PROJECT_APPS + THIRD_PARTY_APPS + CORE_APPS
 
 ROOT_URLCONF = 'controle_atividades.urls'
 
