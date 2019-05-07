@@ -67,8 +67,10 @@ class FinalGrade(models.Model):
     """Model definition for FinalGrade."""
 
     # TODO: Define fields here
-    student = models.ForeignKey(Students, on_delete=models.CASCADE)
-    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    student = models.ForeignKey(
+        Students, verbose_name='Estudante', on_delete=models.CASCADE)
+    activity = models.ForeignKey(
+        Activity, verbose_name='Atividade', on_delete=models.CASCADE)
     grade = models.DecimalField('Nota', max_digits=5, decimal_places=2)
 
     class Meta:
@@ -79,7 +81,7 @@ class FinalGrade(models.Model):
 
     def __str__(self):
         """Unicode representation of FinalGrade."""
-        return self.activity.name
+        return self.student.name
 
 
 class Questions(models.Model):
