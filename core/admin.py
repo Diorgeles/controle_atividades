@@ -1,23 +1,28 @@
 from django.contrib import admin
-from .models import Pergunta, Resposta, Categoria, Aluno
+from .models import Activity, Course, FinalGrade, Questions, Students
 
 
-@admin.register(Aluno)
-class AlunoAdmin(admin.ModelAdmin):
-    list_display = ('matricula', 'nome', 'telefone',
-                    'nota', 'porcentagem_acertos', 'aula')
+@admin.register(Activity)
+class ActivityAdmin(admin.ModelAdmin):
+    list_display = ['course', 'time_start']
 
 
-@admin.register(Resposta)
-class RespostaAdmin(admin.ModelAdmin):
-    list_display = ('alternativa', 'opcao', 'situacao', 'aula', 'perg')
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['name', 'period']
 
 
-@admin.register(Pergunta)
-class PerguntaAdmin(admin.ModelAdmin):
-    list_display = ('perg', 'aula')
+@admin.register(FinalGrade)
+class FinalGradeAdmin(admin.ModelAdmin):
+    list_display = ['student', 'activity', 'grade']
 
 
-@admin.register(Categoria)
-class CategoriaAdmin(admin.ModelAdmin):
-    list_display = ('categoria',)
+@admin.register(Questions)
+class QuestionsAdmin(admin.ModelAdmin):
+    list_display = ['activity', 'question', 'value_question',
+                    'correct_alternative']
+
+
+@admin.register(Students)
+class StudentsAdmin(admin.ModelAdmin):
+    list_display = ['subscription', 'name']
