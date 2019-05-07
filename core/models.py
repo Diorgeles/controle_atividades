@@ -105,8 +105,8 @@ class Questions(models.Model):
     class Meta:
         """Meta definition for Questions."""
 
-        verbose_name = 'Questions'
-        verbose_name_plural = 'Questionss'
+        verbose_name = 'Questão'
+        verbose_name_plural = 'Questões'
 
     def __str__(self):
         """Unicode representation of Questions."""
