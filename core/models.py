@@ -97,10 +97,8 @@ class Questions(models.Model):
     question = models.TextField()
     value_question = models.DecimalField(
         'Valor da pergunta', max_digits=5, decimal_places=2)
-    alternatives = models.CharField(
-        'Alternativas', max_length=50, choices=ALTERNATIVES)
     correct_alternative = models.CharField(
-        'Alternativa Correta', max_length=50)
+        'Alternativa Correta', max_length=50, choices=ALTERNATIVES)
 
     class Meta:
         """Meta definition for Questions."""
@@ -110,4 +108,4 @@ class Questions(models.Model):
 
     def __str__(self):
         """Unicode representation of Questions."""
-        return self.activity.name
+        return self.question

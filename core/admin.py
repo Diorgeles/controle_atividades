@@ -20,7 +20,7 @@ class FinalGradeAdmin(admin.ModelAdmin):
 @admin.register(Questions)
 class QuestionsAdmin(admin.ModelAdmin):
     list_display = ['activity', 'question', 'value_question',
-                    'alternatives', 'correct_alternative']
+                    'correct_alternative']
 
 
 @admin.register(Students)
