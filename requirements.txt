@@ -13,7 +13,14 @@ coverage==4.5.3
 dj-database-url==0.5.0
 django-auditlog==0.4.5
 django-filter==2.0.0
-django-grappelli==2.12.2
+django-grappelli==2.12.2<div class="form-group">
+    <label for="subscription">Matricula</label>
+    <input type="text" class="form-control" id="subscription" placeholder="Por favor inserir a matricula do aluno">
+  </div>
+  <div class="form-group">
+    <label for="name">Nome</label>
+    <input type="text" class="form-control" id="name" placeholder="Por favor inserir o nome do aluno">
+  </div>
 django-heroku==0.3.1
 django-jsonfield==1.0.1
 django-localflavor==2.1

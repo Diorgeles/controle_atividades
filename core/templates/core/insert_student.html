@@ -1,0 +1,9 @@
+{% extends "core/base.html" %}
+{% load bootstrap %}
+{% block main %}
+<form action="{% url 'core_insert_student' %}" method="POST">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+  <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
+{% endblock %}
