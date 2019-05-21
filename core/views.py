@@ -22,3 +22,18 @@ def list_student(request):
     student = Students.objects.all()
     template_name = 'core/list_student.html'
     return render(request, template_name, {'student': student})
+
+
+def update_student(request, id):
+    data = {}
+    template_name = 'core/update_student.html'
+    student = Students.objects.get(id=id)
+    form = StudentsForm(request.POST or None, instance=student)
+    data['student'] = student
+    data['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_list_student')
+    return render(request, template_name, data)
