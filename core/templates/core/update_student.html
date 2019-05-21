@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% load bootstrap %}
+
+{% block main %}
+<div class="row mt-5">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+      <div class="card" style="width:500px">
+          <h5 class="mt-2 px-3">Cadastro de aluno</h5>
+          <div class="card-body">
+            <form action="{% url 'core_update_student' student.id %}" method="POST">
+                {% csrf_token %}
+                {{ form.subscription|bootstrap }}
+                {{ form.name|bootstrap }}
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+            </form>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-3"></div>
+
+</div>
+{% endblock %}
