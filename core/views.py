@@ -16,3 +16,9 @@ def insert_student(request):
         form.save()
         return redirect('core_home')
     return render(request, template_name, {'form': form})
+
+
+def list_student(request):
+    student = Students.objects.all()
+    template_name = 'core/list_student.html'
+    return render(request, template_name, {'student': student})
