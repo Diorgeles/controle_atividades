@@ -18,7 +18,7 @@
           <td>{{ students.subscription }}</td>
           <td>{{ students.name }}</td>
         <td><a href="{% url 'core_update_student' students.id %}"> <img src="{% static 'img/baseline_edit_black_18dp.png' %}"></a>
-            <a href="#"> <img src="{% static 'img/baseline_delete_black_18dp.png' %}"></a>
+            <a href="{% url 'core_delete_student' students.id %}"> <img src="{% static 'img/baseline_delete_black_18dp.png' %}"></a>
         </td>
 
       </tr>

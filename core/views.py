@@ -37,3 +37,13 @@ def update_student(request, id):
             form.save()
             return redirect('core_list_student')
     return render(request, template_name, data)
+
+
+def delete_student(request, id):
+    student = Students.objects.get(id=id)
+    template_name = 'core/delete_confirm.html'
+    if request.method == 'POST':
+        student.delete()
+        return redirect('core_list_student')
+    else:
+        return render(request, template_name, {'obj': student})
