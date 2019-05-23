@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Students
+from .models import Students, Course
 from .forms import StudentsForm, CourseForm
 
 
@@ -59,3 +59,9 @@ def insert_activity(request):
         msg = 'true'
         return render(request, template_name, {'form': form, 'msg': msg})
     return render(request, template_name, {'form': form})
+
+
+def list_course(request):
+    course = Course.objects.all()
+    template_name = 'core/list_course.html'
+    return render(request, template_name, {'course': course})
