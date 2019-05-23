@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Students
-from .forms import StudentsForm
+from .forms import StudentsForm, CourseForm
 
 
 def home(request):
@@ -47,3 +47,15 @@ def delete_student(request, id):
         return redirect('core_list_student')
     else:
         return render(request, template_name, {'obj': student})
+
+
+def insert_activity(request):
+    form = CourseForm(request.POST or None)
+    template_name = 'core/insert_course.html'
+
+    if form.is_valid():
+        form.save()
+        form = CourseForm()
+        msg = 'true'
+        return render(request, template_name, {'form': form, 'msg': msg})
+    return render(request, template_name, {'form': form})
