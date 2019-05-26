@@ -80,3 +80,14 @@ def update_course(request, id):
             form.save()
             return redirect('core_list_course')
     return render(request, template_name, data)
+
+
+def delete_course(request, id):
+    course = Course.objects.get(id=id)
+    template_name = 'core/delete_confirm.html'
+
+    if request.method == 'POST':
+        course.delete()
+        return redirect('core_list_course')
+    else:
+        return render(request, template_name, {'obj': course})
