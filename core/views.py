@@ -109,3 +109,18 @@ def list_activity(request):
     activity = Activity.objects.all()
     template_name = 'core/list_activity.html'
     return render(request, template_name, {'activity': activity})
+
+
+def update_activity(request, id):
+    data = {}
+    template_name = 'core/update_activity.html'
+    activity = Activity.objects.get(id=id)
+    form = ActivityForm(request.POST or None, instance=activity)
+    data['activity'] = activity
+    data['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_list_activity')
+    return render(request, template_name, data)
