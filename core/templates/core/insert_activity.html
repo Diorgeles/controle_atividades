@@ -6,15 +6,15 @@
   <div class="col-sm-3"></div>
   <div class="col-sm-6">
       <div class="card" style="width:500px">
-          <h5 class="mt-2 px-3">Cadastro de Curso</h5>
+          <h5 class="mt-2 px-3">Cadastro de Atividade</h5>
           <div class="card-body">
               {% if msg == 'true' %}
                 <span class="text-success"> Cadastro efetuado com sucesso!</span>
               {% endif %}
             <form action="{% url 'core_insert_course' %}" method="POST">
                 {% csrf_token %}
-                {{ form.name|bootstrap }}
-                {{ form.period|bootstrap }}
+                {{ form.course|bootstrap }}
+                {{ form.time_start|bootstrap }}
                <button class="btn btn-primary"> Cadastrar</button>
            </form>
           </div>

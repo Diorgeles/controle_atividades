@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Students, Course
-from .forms import StudentsForm, CourseForm
+from .models import Students, Course, Activity
+from .forms import StudentsForm, CourseForm, ActivityForm
 
 
 def home(request):
@@ -49,7 +49,7 @@ def delete_student(request, id):
         return render(request, template_name, {'obj': student})
 
 
-def insert_activity(request):
+def insert_course(request):
     form = CourseForm(request.POST or None)
     template_name = 'core/insert_course.html'
 
@@ -91,3 +91,15 @@ def delete_course(request, id):
         return redirect('core_list_course')
     else:
         return render(request, template_name, {'obj': course})
+
+
+def insert_activity(request):
+    form = ActivityForm(request.POST or None)
+    template_name = 'core/insert_activity.html'
+
+    if form.is_valid():
+        form.save()
+        form = CourseForm()
+        msg = 'true'
+        return render(request, template_name, {'form': form, 'msg': msg})
+    return render(request, template_name, {'form': form})
