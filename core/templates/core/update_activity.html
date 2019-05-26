@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+{% load bootstrap %}
+
+{% block main %}
+ <div class="row mt-5">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <div class="card" style="width:500px">
+            <h5 class="mt-2 px-3">Edição de Atividade</h5>
+            <div class="card-body">
+              <form action="{% url 'core_update_activity' activity.id %}" method="POST">
+                  {% csrf_token %}
+                  {{ form.course|bootstrap }}
+                  {{ form.time_start|bootstrap }}
+                  <button type="submit" class="btn btn-primary">Atualizar</button>
+              </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3"></div>
+  
+  </div>
+{% endblock %}
+    
