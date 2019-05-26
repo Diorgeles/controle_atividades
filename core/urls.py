@@ -5,7 +5,8 @@ from .views import home,\
     update_student, \
     delete_student, \
     insert_activity, \
-    list_course
+    list_course, \
+    update_course
 
 urlpatterns = [
     path('', home, name='core_home'),
@@ -15,5 +16,6 @@ urlpatterns = [
     path('excluir-aluno/<int:id>', delete_student, name='core_delete_student'),
     path('cadastrar-curso', insert_activity, name='core_insert_course'),
     path('listar-curso', list_course, name='core_list_course'),
+    path('atualizar-curso/<int:id>', update_course, name='core_update_course'),
 
 ]
