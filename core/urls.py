@@ -8,7 +8,8 @@ from .views import home,\
     list_course, \
     update_course, \
     delete_course, \
-    insert_activity
+    insert_activity, \
+    list_activity
 
 urlpatterns = [
     path('', home, name='core_home'),
@@ -21,5 +22,6 @@ urlpatterns = [
     path('atualizar-curso/<int:id>', update_course, name='core_update_course'),
     path('excluir-curso/<int:id>', delete_course, name='core_delete_course'),
     path('cadastrar-atividade', insert_activity, name='core_insert_activity'),
+    path('listar-atividade', list_activity, name='core_list_activity'),
 
 ]

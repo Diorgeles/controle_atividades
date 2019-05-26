@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main %}
+    <div class="container mt-5">
+  <h5>Lista de Atividades</h5>
+  <p>Abaixo a lista de atividades cadastradas</p>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Atividade</th>
+        <th>Hora de inicio</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for activitys in activity %}
+      <tr>
+          <td>{{ activitys.course }}</td>
+          <td>{{ activitys.time_start }}</td>
+        <td><a href="#"> <img src="{% static 'img/baseline_edit_black_18dp.png' %}"></a>
+            <a href="#"> <img src="{% static 'img/baseline_delete_black_18dp.png' %}"></a>
+        </td>
+
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

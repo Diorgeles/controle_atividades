@@ -103,3 +103,9 @@ def insert_activity(request):
         msg = 'true'
         return render(request, template_name, {'form': form, 'msg': msg})
     return render(request, template_name, {'form': form})
+
+
+def list_activity(request):
+    activity = Activity.objects.all()
+    template_name = 'core/list_activity.html'
+    return render(request, template_name, {'activity': activity})
