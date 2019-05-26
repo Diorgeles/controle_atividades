@@ -65,3 +65,18 @@ def list_course(request):
     course = Course.objects.all()
     template_name = 'core/list_course.html'
     return render(request, template_name, {'course': course})
+
+
+def update_course(request, id):
+    data = {}
+    template_name = 'core/update_course.html'
+    course = Course.objects.get(id=id)
+    form = CourseForm(request.POST or None, instance=course)
+    data['course'] = course
+    data['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_list_course')
+    return render(request, template_name, data)

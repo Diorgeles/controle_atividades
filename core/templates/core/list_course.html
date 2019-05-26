@@ -18,7 +18,7 @@
       <tr>
           <td>{{ courses.name }}</td>
           <td>{{ courses.period }}</td>
-        <td><a href="#"> <img src="{% static 'img/baseline_edit_black_18dp.png' %}"></a>
+        <td><a href="{% url 'core_update_course' courses.id %}"> <img src="{% static 'img/baseline_edit_black_18dp.png' %}"></a>
             <a href="#"> <img src="{% static 'img/baseline_delete_black_18dp.png' %}"></a>
         </td>
 
