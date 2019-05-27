@@ -1,0 +1,45 @@
+{% extends "base_add_list.html" %}
+{% load bootstrap %}
+
+{% comment %} INSERT {% endcomment %}
+{% block insert_title %}Cadastrar curso{% endblock insert_title %}
+{% block insert_data %}
+<form action="{% if courseId %}
+        {% url 'course' course.id %}
+    {% else %}
+        {% url 'courses' %}
+    {% endif %}" method="POST">
+    {% csrf_token %}
+    {{ form.name|bootstrap }}
+    {{ form.period|bootstrap }}
+    <button type="submit" class="btn btn-primary"
+        name='SAVE'>{% if courseId %}Atualizar{% else %}Salvar{% endif %}</button>
+    {% if courseId %}<button type="submit" class="btn btn-danger" name='DELETE'>Deletar</button>{% endif %}
+</form>
+{% endblock insert_data %}
+
+{% comment %} LIST {% endcomment %}
+{% block list_title %}Lista de Cursos{% endblock list_title %}
+{% block list_columns %}
+<tr>
+    <th>Curso</th>
+    <th colspan='2'>Periodo</th>
+</tr>
+{% endblock list_columns %}
+{% block list_data %}
+{% for course in courses %}
+<tr>
+    <td>{{ course.name }}</td>
+    <td class='w-75'>{{ course.get_period_display }}</td>
+    <td class='text-right'>
+        <a href="{% url 'course' course.id %}" class='pr-2'>
+            <i class="fa fa-pencil fa-lg text-info"></i>
+        </a>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan='2' class='text-center'>Ainda não existe cursos cadastrados</td>
+</tr>
+{% endfor %}
+{% endblock list_data %}

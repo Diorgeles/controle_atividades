@@ -4,102 +4,91 @@ from .forms import StudentsForm, CourseForm, ActivityForm
 
 
 def home(request):
-    template_name = 'core/base.html'
+    template_name = 'base.html'
     return render(request, template_name)
 
 
-def insert_student(request):
+def students(request):
+    """This view is reponsible for creating and listing"""
+    template_name = 'student.html'
     form = StudentsForm(request.POST or None)
-    template_name = 'core/insert_student.html'
-
-    if form.is_valid():
-        form.save()
-        return redirect('core_home')
-    return render(request, template_name, {'form': form})
-
-
-def list_student(request):
-    student = Students.objects.all()
-    template_name = 'core/list_student.html'
-    return render(request, template_name, {'student': student})
+    students = Students.objects.all()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('students')
+    return render(request, template_name, locals())
 
 
-def update_student(request, id):
-    data = {}
-    template_name = 'core/update_student.html'
-    student = Students.objects.get(id=id)
+def student(request, studentId):
+    """This view is reponsible for updating and deleting"""
+    template_name = 'student.html'
+    student = Students.objects.get(id=studentId)
+    students = Students.objects.all()
     form = StudentsForm(request.POST or None, instance=student)
-    data['student'] = student
-    data['form'] = form
-
     if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return redirect('core_list_student')
-    return render(request, template_name, data)
+        if 'SAVE' in request.POST:
+            if form.is_valid():
+                form.save()
+        if 'DELETE' in request.POST:
+            student.delete()
+        return redirect('students')
+    return render(request, template_name, locals())
 
 
-def delete_student(request, id):
-    student = Students.objects.get(id=id)
-    template_name = 'core/delete_confirm.html'
-    if request.method == 'POST':
-        student.delete()
-        return redirect('core_list_student')
-    else:
-        return render(request, template_name, {'obj': student})
-
-
-def insert_course(request):
+def courses(request):
+    """This view is reponsible for creating and listing"""
+    template_name = 'course.html'
     form = CourseForm(request.POST or None)
-    template_name = 'core/insert_course.html'
-
-    if form.is_valid():
-        form.save()
-        form = CourseForm()
-        msg = 'true'
-        return render(request, template_name, {'form': form, 'msg': msg})
-    return render(request, template_name, {'form': form})
-
-
-def list_course(request):
-    course = Course.objects.all()
-    template_name = 'core/list_course.html'
-    return render(request, template_name, {'course': course})
-
-
-def update_course(request, id):
-    data = {}
-    template_name = 'core/update_course.html'
-    course = Course.objects.get(id=id)
-    form = CourseForm(request.POST or None, instance=course)
-    data['course'] = course
-    data['form'] = form
-
+    courses = Course.objects.all()
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return redirect('core_list_course')
-    return render(request, template_name, data)
+            return redirect('courses')
+    return render(request, template_name, locals())
 
 
-def delete_course(request, id):
-    course = Course.objects.get(id=id)
-    template_name = 'core/delete_confirm.html'
+def course(request, courseId):
+    """This view is reponsible for updating and deleting"""
+    template_name = 'course.html'
+    course = Course.objects.get(id=courseId)
+    courses = Course.objects.all()
+    form = CourseForm(request.POST or None, instance=course)
 
     if request.method == 'POST':
-        course.delete()
-        return redirect('core_list_course')
-    else:
-        return render(request, template_name, {'obj': course})
+        if 'SAVE' in request.POST:
+            if form.is_valid():
+                form.save()
+        if 'DELETE' in request.POST:
+            course.delete()
+        return redirect('courses')
+    return render(request, template_name, locals())
 
 
-def insert_activity(request):
+def activities(request):
+    """This view is reponsible for creating and listing"""
+    template_name = 'activity.html'
     form = ActivityForm(request.POST or None)
-    template_name = 'core/insert_activity.html'
+    activities = Activity.objects.all()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('activities')
+    return render(request, template_name, locals())
 
-    if form.is_valid():
-        form.save()
-        form = CourseForm()
-        msg = 'true'
-        return render(request, template_name, {'form': form, 'msg': msg})
-    return render(request, template_name, {'form': form})
+
+def activity(request, activityId):
+    """This view is reponsible for updating and deleting"""
+    template_name = 'activity.html'
+    activity = Activity.objects.get(id=activityId)
+    activities = Activity.objects.all()
+    form = ActivityForm(request.POST or None, instance=activity)
+
+    if request.method == 'POST':
+        if 'SAVE' in request.POST:
+            if form.is_valid():
+                form.save()
+        if 'DELETE' in request.POST:
+            activity.delete()
+        return redirect('activities')
+    return render(request, template_name, locals())
