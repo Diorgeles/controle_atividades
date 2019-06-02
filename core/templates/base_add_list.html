@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block main %}
+
+<div class="row">
+    {% comment %} list items {% endcomment %}
+    <div class="col-sm-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% block insert_title %}
+                    {% endblock insert_title %}
+                </h5>
+                {% block insert_data %}
+                {% endblock insert_data %}
+            </div>
+        </div>
+    </div>
+
+    {% comment %} add item {% endcomment %}
+    <div class="col-sm-9">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% block list_title %}
+                    {% endblock list_title %}
+                </h5>
+                <p>
+                    {% block list_help %}
+                    {% endblock list_help %}
+                </p>
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        {% block list_columns %}
+                        {% endblock list_columns %}
+                    </thead>
+                    <tbody>
+                        {% block list_data %}
+                        {% endblock list_data %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

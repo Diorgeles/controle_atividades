@@ -1,0 +1,14 @@
+{
+  "name": "controle_atividades",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Diorgeles/controle_atividades.git",
+  "author": "Diorgeles <diorgelesdias@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "1.9.1",
+    "popper.js": "^1.14.7"
+  }
+}
