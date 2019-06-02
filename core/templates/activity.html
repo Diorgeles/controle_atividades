@@ -1,0 +1,46 @@
+{% extends "base_add_list.html" %}
+{% load bootstrap %}
+
+{% comment %} INSERT {% endcomment %}
+{% block insert_title %}Cadastrar Atividade{% endblock insert_title %}
+{% block insert_data %}
+<form action="
+    {% if activityId %}
+        {% url 'activity' activityId %}
+    {% else %}
+        {% url 'activities' %}
+    {% endif %}" method=" POST">
+    {% csrf_token %}
+    {{ form.course|bootstrap }}
+    {{ form.time_start|bootstrap }}
+    <button type="submit" class="btn btn-primary"
+        name='SAVE'>{% if activityId %}Atualizar{% else %}Salvar{% endif %}</button>
+    {% if activityId %}<button type="submit" class="btn btn-danger" name='DELETE'>Deletar</button>{% endif %}
+</form>
+{% endblock insert_data %}
+
+{% comment %} LIST {% endcomment %}
+{% block list_title %}Lista de Atividades{% endblock list_title %}
+{% block list_columns %}
+<tr>
+    <th>Curso</th>
+    <th colspan='2'>Periodo</th>
+</tr>
+{% endblock list_columns %}
+{% block list_data %}
+{% for activity in activities %}
+<tr>
+    <td>{{ activity.course.name }}</td>
+    <td class='w-75'>{{ activity.time_start }}</td>
+    <td class='text-right'>
+        <a href="{% url 'activity' activity.id %}">
+            <i class="fa fa-pencil fa-lg text-info"></i>
+        </a>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan='2' class='text-center'>Ainda não existe atividades cadastradas</td>
+</tr>
+{% endfor %}
+{% endblock list_data %}

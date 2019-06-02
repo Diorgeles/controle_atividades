@@ -1,0 +1,49 @@
+{% extends "base_add_list.html" %}
+{% load bootstrap %}
+
+{% comment %} INSERT {% endcomment %}
+{% block insert_title %}Cadastrar aluno{% endblock insert_title %}
+{% block insert_data %}
+<form action="
+    {% if studentId %}
+        {% url 'student' studentId %}
+    {% else %}
+        {% url 'students' %}
+    {% endif %}" method="POST">
+    {% csrf_token %}
+    {{ form.subscription|bootstrap }}
+    {{ form.name|bootstrap }}
+    <button type="submit" class="btn btn-primary" name='SAVE'>{% if studentId %}Atualizar{% else %}Salvar{% endif %}</button>
+    {% if studentId %}<button type="submit" class="btn btn-danger" name='DELETE'>Deletar</button>{% endif %}
+</form>
+{% endblock insert_data %}
+{% comment %} END INSERT {% endcomment %}
+
+{% comment %} LIST {% endcomment %}
+{% block list_title %}Lista de alunos{% endblock list_title %}
+
+{% block list_columns %}
+<tr>
+    <th>Matricula</th>
+    <th colspan='2'>Nome</th>
+</tr>
+{% endblock list_columns %}
+
+{% block list_data %}
+{% for student in students %}
+<tr>
+    <td>{{ student.subscription }}</td>
+    <td class='w-75'>{{ student.name }}</td>
+    <td class='text-right'>
+        <a href="{% url 'student' student.id %}" class='pr-2'>
+            <i class="fa fa-pencil fa-lg text-info"></i>
+        </a>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan='2' class='text-center'>Ainda não existe alunos cadastrados</td>
+</tr>
+{% endfor %}
+{% endblock list_data %}
+{% comment %} END LIST {% endcomment %}
