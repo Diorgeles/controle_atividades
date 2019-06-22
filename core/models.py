@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from model_utils.models import SoftDeletableModel, TimeStampedModel
 
 
@@ -6,6 +7,7 @@ class Students(SoftDeletableModel, TimeStampedModel):
     """Model definition for Students."""
 
     # TODO: Define fields here
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     subscription = models.CharField('Inscrição', max_length=50)
     name = models.CharField('Nome', max_length=100)
 

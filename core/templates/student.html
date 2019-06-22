@@ -11,6 +11,7 @@
         {% url 'students' %}
     {% endif %}" method="POST">
     {% csrf_token %}
+    {{ form.user|bootstrap }}
     {{ form.subscription|bootstrap }}
     {{ form.name|bootstrap }}
     <button type="submit" class="btn btn-primary" name='SAVE'>{% if studentId %}Atualizar{% else %}Salvar{% endif %}</button>
