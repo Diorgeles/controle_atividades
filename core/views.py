@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Students, Course, Activity
 from .forms import StudentsForm, CourseForm, ActivityForm
-
+from django.contrib.auth.models import User
 
 def home(request):
     template_name = 'base.html'
@@ -92,3 +92,20 @@ def activity(request, activityId):
             activity.delete()
         return redirect('activities')
     return render(request, template_name, locals())
+
+
+def register_user(request):
+    template_name = 'register.html'
+    if request.method == 'POST':
+        user = request.POST['user']
+        email = request.POST['email']
+        senha = request.POST['senha']
+        newUser = User.objects.create_user(username=user, email=email, password=senha)
+        newUser.save()
+        my_group = Group.objects.get(name='aluno')
+        my_group.user_set.add(newUser)
+        msg = 'true'
+        if msg == 'true':
+            return render(request, template_name, locals())
+
+    return render(request, template_name)
