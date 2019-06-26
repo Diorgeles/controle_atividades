@@ -103,10 +103,9 @@ def register_user(request):
         email = request.POST['email']
         senha = request.POST['senha']
         name = request.POST['name']
-        subscription = request.POST['subscription']
         newUser = User.objects.create_user(username=user, email=email, password=senha)
         newUser.save()
-        student = Students.objects.create(user=newUser, name=name, subscription=subscription)
+        student = Students.objects.create(user=newUser, name=name)
         my_group = Group.objects.get(name='aluno')
         my_group.user_set.add(newUser)
         msg = 'true'

@@ -11,21 +11,17 @@
                       {% if msg == 'true' %}
                         <span style="color: green"> Cadastro efetuado com sucesso!</span>
                       {% endif %}
-                      <form method="POST" class="was-validated">
+                      <form method="POST">
                           {% csrf_token %}
                           <div class="form-group">
                             <label for="name">Nome</label>
                             <input type="name" class="form-control" id="name" name="name" placeholder="insira seu nome aqui" required>
                           </div>
                           <div class="form-group">
-                            <label for="subscription">Matricula</label>
-                            <input type="name" class="form-control" id="subscription" value="{{ subscription }}" name="subscription" readonly>
-                          </div>
-                          <div class="form-group">
                             <label for="userName">Usuário</label>
                             <input type="name" class="form-control" id="userName" name="user" placeholder="insira seu usuário" required>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group was-validated">
                             <label for="exampleFormControlInput1">Endereço de email</label>
                             <input type="email" class="form-control" id="exampleFormControlInput1" name="email" placeholder="nome@exemplo.com" required>
                           </div>
