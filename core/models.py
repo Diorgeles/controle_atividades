@@ -1,12 +1,15 @@
 from django.db import models
+from django.contrib.auth.models import User
 from model_utils.models import SoftDeletableModel, TimeStampedModel
+import uuid
 
 
 class Students(SoftDeletableModel, TimeStampedModel):
     """Model definition for Students."""
 
     # TODO: Define fields here
-    subscription = models.CharField('Inscrição', max_length=50)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subscription = models.CharField(max_length=8, editable=False)
     name = models.CharField('Nome', max_length=100)
 
     class Meta:
@@ -18,6 +21,14 @@ class Students(SoftDeletableModel, TimeStampedModel):
     def __str__(self):
         """Unicode representation of Students."""
         return self.name
+    # Fiz um override o save default
+    def save(self):
+        # toda vez que o save é chamado em alguma parte do codigo, indiretamente ele entra nesse save aqui
+        # dai o que fiz foi adicionar esse uuid, tranformando ele em string e pegando os 6 primeiros caracteres
+        # logo em seguida eu dei um "super" que vai ser responsavel por da seguimento a função save e vai salvar
+        # os demais campos normalmente
+        self.subscription = str(uuid.uuid4().time_low)[:6]
+        super(Students, self).save()
 
 
 class Course(SoftDeletableModel, TimeStampedModel):

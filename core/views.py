@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Students, Course, Activity
 from .forms import StudentsForm, CourseForm, ActivityForm
-
+from django.contrib.auth.models import User, Group
+from random import randint
 
 def home(request):
     template_name = 'base.html'
@@ -91,4 +92,24 @@ def activity(request, activityId):
         if 'DELETE' in request.POST:
             activity.delete()
         return redirect('activities')
+    return render(request, template_name, locals())
+
+
+def register_user(request):
+    template_name = 'register.html'
+    subscription = randint(0, 10000)
+    if request.method == 'POST':
+        user = request.POST['user']
+        email = request.POST['email']
+        senha = request.POST['senha']
+        name = request.POST['name']
+        newUser = User.objects.create_user(username=user, email=email, password=senha)
+        newUser.save()
+        student = Students.objects.create(user=newUser, name=name)
+        my_group = Group.objects.get(name='aluno')
+        my_group.user_set.add(newUser)
+        msg = 'true'
+
+        return render(request, template_name, locals())
+
     return render(request, template_name, locals())
