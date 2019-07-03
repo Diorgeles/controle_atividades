@@ -8,34 +8,22 @@ def home(request):
     template_name = 'base.html'
     return render(request, template_name)
 
-
-def students(request):
-    """This view is reponsible for creating and listing"""
-    template_name = 'student.html'
-    form = StudentsForm(request.POST or None)
-    students = Students.objects.all()
+def register_student(request):
+    template_name = 'register_student.html'
     if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return redirect('students')
+        user = request.POST['user']
+        email = request.POST['email']
+        senha = request.POST['senha']
+        name = request.POST['name']
+        newUser = User.objects.create_user(username=user, email=email, password=senha)
+        newUser.save()
+        student = Students.objects.create(user=newUser, name=name)
+        my_group = Group.objects.get(name='aluno')
+        my_group.user_set.add(newUser)
+        msg = 'true'
+
+        return render(request, template_name, locals())
     return render(request, template_name, locals())
-
-
-def student(request, studentId):
-    """This view is reponsible for updating and deleting"""
-    template_name = 'student.html'
-    student = Students.objects.get(id=studentId)
-    students = Students.objects.all()
-    form = StudentsForm(request.POST or None, instance=student)
-    if request.method == 'POST':
-        if 'SAVE' in request.POST:
-            if form.is_valid():
-                form.save()
-        if 'DELETE' in request.POST:
-            student.delete()
-        return redirect('students')
-    return render(request, template_name, locals())
-
 
 def courses(request):
     """This view is reponsible for creating and listing"""
@@ -94,22 +82,3 @@ def activity(request, activityId):
         return redirect('activities')
     return render(request, template_name, locals())
 
-
-def register_user(request):
-    template_name = 'register.html'
-    subscription = randint(0, 10000)
-    if request.method == 'POST':
-        user = request.POST['user']
-        email = request.POST['email']
-        senha = request.POST['senha']
-        name = request.POST['name']
-        newUser = User.objects.create_user(username=user, email=email, password=senha)
-        newUser.save()
-        student = Students.objects.create(user=newUser, name=name)
-        my_group = Group.objects.get(name='aluno')
-        my_group.user_set.add(newUser)
-        msg = 'true'
-
-        return render(request, template_name, locals())
-
-    return render(request, template_name, locals())

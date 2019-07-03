@@ -1,41 +1,50 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Control Activity{% endblock %}</title>
 
-    <link rel="stylesheet" media="all" href="{% static 'font-awesome/css/font-awesome.css' %}" type="text/css"
-        charset="utf-8">
-    <link rel="stylesheet" media="all" href="{% static 'bootstrap/dist/css/bootstrap.css' %}" type="text/css"
-        charset="utf-8">
-</head>
+    <link
+      rel="stylesheet"
+      media="all"
+      href="{% static 'font-awesome/css/font-awesome.css' %}"
+      type="text/css"
+      charset="utf-8"
+    />
+    <link
+      rel="stylesheet"
+      media="all"
+      href="{% static 'bootstrap/dist/css/bootstrap.css' %}"
+      type="text/css"
+      charset="utf-8"
+    />
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <!-- Brand -->
-        <a class="navbar-brand" href="#">Ftceiraidade</a>
+      <!-- Brand -->
+      <a class="navbar-brand" href="#">Ftceiraidade</a>
 
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="{% url 'students' %}">Alunos</a>
-                <a class="nav-item nav-link" href="{% url 'courses' %}">Cursos</a>
-                <a class="nav-item nav-link" href="{% url 'activities' %}">Atividades</a>
-            </div>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="{% url 'courses' %}">Cursos</a>
+          <a class="nav-item nav-link" href="{% url 'activities' %}"
+            >Atividades</a
+          >
         </div>
+      </div>
     </nav>
 
     <div class="row"></div>
     <div class="container mt-5">
-        {% block main %} {% endblock %}
+      {% block main %} {% endblock %}
     </div>
 
     <script src="{% static 'jquery/jquery.js'%}"></script>
     <script src="{% static 'bootstrap/dist/js/bootstrap.js'%}"></script>
     <script src="{% static 'popper.js/dist/popper.js'%}"></script>
     {% block script %} {% endblock %}
-</body>
-
+  </body>
 </html>
