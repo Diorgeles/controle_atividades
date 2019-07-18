@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from .models import Students, Course, Activity
 from .forms import StudentsForm, CourseForm, ActivityForm
 from django.contrib.auth.models import User, Group
-from random import randint
+
 
 def home(request):
     template_name = 'base.html'
     return render(request, template_name)
+
 
 def register_student(request):
     template_name = 'register_student.html'
@@ -24,6 +25,7 @@ def register_student(request):
 
         return render(request, template_name, locals())
     return render(request, template_name, locals())
+
 
 def courses(request):
     """This view is reponsible for creating and listing"""
@@ -82,3 +84,7 @@ def activity(request, activityId):
         return redirect('activities')
     return render(request, template_name, locals())
 
+
+def home_student(request):
+    template_name = 'home_student.html'
+    return render(request, template_name)
