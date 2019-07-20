@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Students, Course, Activity
 from .forms import StudentsForm, CourseForm, ActivityForm
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -27,6 +28,7 @@ def register_student(request):
     return render(request, template_name, locals())
 
 
+@login_required()
 def courses(request):
     """This view is reponsible for creating and listing"""
     template_name = 'course.html'
@@ -39,6 +41,7 @@ def courses(request):
     return render(request, template_name, locals())
 
 
+@login_required()
 def course(request, courseId):
     """This view is reponsible for updating and deleting"""
     template_name = 'course.html'
@@ -56,6 +59,7 @@ def course(request, courseId):
     return render(request, template_name, locals())
 
 
+@login_required()
 def activities(request):
     """This view is reponsible for creating and listing"""
     template_name = 'activity.html'
@@ -68,6 +72,7 @@ def activities(request):
     return render(request, template_name, locals())
 
 
+@login_required()
 def activity(request, activityId):
     """This view is reponsible for updating and deleting"""
     template_name = 'activity.html'
@@ -83,8 +88,3 @@ def activity(request, activityId):
             activity.delete()
         return redirect('activities')
     return render(request, template_name, locals())
-
-
-def home_student(request):
-    template_name = 'home_student.html'
-    return render(request, template_name)

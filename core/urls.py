@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, include
+from django.contrib.auth import login
 
 from .views import (home, courses,
                     course, activity, activities,
-                    register_student, home_student)
+                    register_student)
 
 urlpatterns = [
     path('', home, name='core_home'),
@@ -11,5 +12,4 @@ urlpatterns = [
     path('atividades', activities, name='activities'),
     path('atividades/<int:activityId>', activity, name='activity'),
     path('cadastro_aluno', register_student, name='register_student'),
-    path('home_aluno', home_student, name='home_student'),
 ]
