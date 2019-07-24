@@ -4,12 +4,12 @@ from .forms import StudentsForm, CourseForm, ActivityForm
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 
-
+@login_required()
 def home(request):
     template_name = 'base.html'
     return render(request, template_name)
 
-
+@login_required()
 def register_student(request):
     template_name = 'register_student.html'
     if request.method == 'POST':
