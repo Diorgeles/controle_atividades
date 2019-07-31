@@ -55,7 +55,7 @@ class Course(SoftDeletableModel, TimeStampedModel):
         return self.name
 
 
-class Activity(models.Model):
+class Activity(SoftDeletableModel, TimeStampedModel):
     """Model definition for Activity."""
 
     # TODO: Define fields here
@@ -74,7 +74,7 @@ class Activity(models.Model):
         return self.course.name
 
 
-class FinalGrade(models.Model):
+class FinalGrade(SoftDeletableModel, TimeStampedModel):
     """Model definition for FinalGrade."""
 
     # TODO: Define fields here
@@ -95,7 +95,7 @@ class FinalGrade(models.Model):
         return self.student.name
 
 
-class Questions(models.Model):
+class Questions(SoftDeletableModel, TimeStampedModel):
     """Model definition for Questions."""
 
     ALTERNATIVES = [
@@ -112,6 +112,7 @@ class Questions(models.Model):
         'Valor da pergunta', max_digits=5, decimal_places=2)
     correct_alternative = models.CharField(
         'Alternativa Correta', max_length=50, choices=ALTERNATIVES)
+    wrong_alternative = models.ManyToManyField('WrongAlternative', verbose_name='Respostas incorretas')
 
     class Meta:
         """Meta definition for Questions."""
@@ -122,3 +123,28 @@ class Questions(models.Model):
     def __str__(self):
         """Unicode representation of Questions."""
         return self.question
+
+
+class WrongAlternative(SoftDeletableModel, TimeStampedModel):
+
+    ALTERNATIVES = [
+        ('a', 'A)'),
+        ('b', 'B)'),
+        ('c', 'C)'),
+        ('d', 'D)'),
+    ]
+
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    response = models.CharField('Resposta', max_length=100)
+    alternative = models.CharField(
+        'Alternativa incorreta', max_length=50, choices=ALTERNATIVES)
+
+    class Meta:
+        """Meta definition for Response."""
+
+        verbose_name = 'Alternativa Incorreta'
+        verbose_name_plural = 'Alternativas Incorretas'
+
+    def __str__(self):
+        """Unicode representation of Response."""
+        return '{} - {}) {}'.format(self.activity, self.alternative, self.response)
