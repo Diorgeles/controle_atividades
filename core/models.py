@@ -41,6 +41,8 @@ class Course(SoftDeletableModel, TimeStampedModel):
     ]
 
     # TODO: Define fields here
+    students = models.ManyToManyField(
+        Students, verbose_name='Estudantes', blank=True)
     name = models.CharField('Nome', max_length=100)
     period = models.CharField('Período', max_length=50, choices=PERIOD_TYPE)
 
@@ -60,6 +62,7 @@ class Activity(SoftDeletableModel, TimeStampedModel):
 
     # TODO: Define fields here
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    name = models.CharField('Nome', max_length=100, null=True)
     time_start = models.DateTimeField(
         'Hora de início', auto_now=False, auto_now_add=False)
 
@@ -71,7 +74,7 @@ class Activity(SoftDeletableModel, TimeStampedModel):
 
     def __str__(self):
         """Unicode representation of Activity."""
-        return self.course.name
+        return 'Curso: {} - Atividade: {}'.format(self.course.name, self.name)
 
 
 class FinalGrade(SoftDeletableModel, TimeStampedModel):
@@ -110,9 +113,12 @@ class Questions(SoftDeletableModel, TimeStampedModel):
     question = models.TextField()
     value_question = models.DecimalField(
         'Valor da pergunta', max_digits=5, decimal_places=2)
+    response = models.CharField(
+        'Resposta', max_length=100, blank=True, null=True)
     correct_alternative = models.CharField(
         'Alternativa Correta', max_length=50, choices=ALTERNATIVES)
-    wrong_alternative = models.ManyToManyField('WrongAlternative', verbose_name='Respostas incorretas')
+    wrong_alternative = models.ManyToManyField(
+        'WrongAlternative', verbose_name='Respostas incorretas')
 
     class Meta:
         """Meta definition for Questions."""
@@ -147,4 +153,4 @@ class WrongAlternative(SoftDeletableModel, TimeStampedModel):
 
     def __str__(self):
         """Unicode representation of Response."""
-        return '{} - {}) {}'.format(self.activity, self.alternative, self.response)
+        return '{} - {}) {}'.format(self.activity.name, self.alternative, self.response)

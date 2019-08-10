@@ -4,13 +4,14 @@ from .models import Activity, Course, FinalGrade, Questions, Students, WrongAlte
 
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ['course', 'time_start']
+    list_display = ['course', 'name', 'time_start']
 
 
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['name', 'period']
+    filter_horizontal = ('students',)
 
 
 @admin.register(FinalGrade)
@@ -20,7 +21,7 @@ class FinalGradeAdmin(admin.ModelAdmin):
 
 @admin.register(Questions)
 class QuestionsAdmin(admin.ModelAdmin):
-    list_display = ['activity', 'question', 'value_question',
+    list_display = ['activity', 'question', 'response','value_question',
                     'correct_alternative']
     filter_horizontal = ('wrong_alternative',)
 
