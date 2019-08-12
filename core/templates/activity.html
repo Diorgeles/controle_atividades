@@ -33,6 +33,7 @@
     {% endif %}" method=" POST">
     {% csrf_token %}
     {{ form.course|bootstrap }}
+    {{ form.name|bootstrap }}
     {{ form.time_start|bootstrap }}
     <button type="submit" class="btn btn-primary"
         name='SAVE'>{% if activityId %}Atualizar{% else %}Salvar{% endif %}</button>
@@ -45,6 +46,7 @@
 {% block list_columns %}
 <tr>
     <th>Curso</th>
+    <th>Nome</th>
     <th colspan='2'>Periodo</th>
 </tr>
 {% endblock list_columns %}
@@ -52,7 +54,8 @@
 {% for activity in activities %}
 <tr>
     <td>{{ activity.course.name }}</td>
-    <td class='w-75'>{{ activity.time_start }}</td>
+    <td>{{ activity.name }}</td>
+    <td class='w-45'>{{ activity.time_start }}</td>
     <td class='text-right'>
         <a href="{% url 'activity' activity.id %}">
             <i class="fa fa-pencil fa-lg text-info"></i>
