@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Students, Course, Activity
+from .models import Students, Course, Activity, Questions
 from .forms import StudentsForm, CourseForm, ActivityForm
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
@@ -87,4 +87,26 @@ def activity(request, activityId):
         if 'DELETE' in request.POST:
             activity.delete()
         return redirect('activities')
+    return render(request, template_name, locals())
+
+
+def register_activity(request):
+    pergunta = Questions.objects.all()
+    template_name = 'register_activity.html'
+
+    try:
+        q = Questions()
+        id = request.POST.get('atividade')
+        a = Questions.objects.get(id=id)
+        q.activity = a
+        q.question = request.POST.get('pergunta')
+        q.response = request.POST.get('opcao')
+
+        if request.method == 'POST':
+            if 'SAVE' in request.POST:
+                q.save()
+                return render(request, template_name, locals())
+    except:
+        pass
+
     return render(request, template_name, locals())

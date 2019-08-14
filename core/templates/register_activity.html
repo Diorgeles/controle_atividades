@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block menu %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Ftceiraidade</a>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+
+                <a class="nav-item nav-link" href="{% url 'courses' %}">Cursos</a>
+                <a class="nav-item nav-link" href="{% url 'activities' %}"
+                >Atividades</a
+                >
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+            <a class="nav-item nav-link disabled text-white mr-5" href="#"> Bem Vindo(a) {{ request.user }}</a>
+        {% endif %}
+    </nav>
+{% endblock %}
+
+{% block main %}
+    <section class="py-4">
+
+        <form method="POST" action="{% url 'register_activity' %}">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-2"></div>
+                <div class="col-8">
+
+                <label for="materia">Selecione a materia</label>
+                    <select class="form-control" name="atividade" id="materia">
+                        {% for perg in pergunta %}
+                        <option value="{{ perg.id }}"> {{ perg.activity}} </option>
+                        {% endfor %}
+                    </select>
+                    <label for="pergunta" class="mt-2">Pergunta </label>
+                    <textarea class="form-control" id="pergunta" rows="5"  name="pergunta" required></textarea>
+
+                    <div class="input-group mt-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <label for="opcao1" class="mt-2">A) </label>
+                            <input type="radio" id="opcao1" name="opcao" value="a" aria-label="radio button input" required>
+                        </div>
+                      </div>
+                        <textarea type="text" class="form-control" name="txt_opcao1 aria-label="Colocar texto na primeira opção" required></textarea>
+                    </div>
+
+                    <div class="input-group mt-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <label for="opcao2" class="mt-2">B) </label>
+                            <input type="radio" id="opcao2" name="opcao" value="b" aria-label="radio button input" required>
+                        </div>
+                      </div>
+                        <textarea type="text" class="form-control" name="txt_opcao2 aria-label="Colocar texto na primeira opção" required></textarea>
+                    </div>
+
+                    <div class="input-group mt-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <label for="opcao3" class="mt-2">C) </label>
+                            <input type="radio" id="opcao3" name="opcao" value="c" aria-label="radio button input" required>
+                        </div>
+                      </div>
+                        <textarea type="text" class="form-control" name="txt_opcao3 aria-label="Colocar texto na primeira opção" required></textarea>
+                    </div>
+
+                    <div class="input-group mt-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <label for="opcao4" class="mt-2">D) </label>
+                            <input type="radio" id="opcao4" name="opcao" value="d" aria-label="radio button input" required>
+                        </div>
+                      </div>
+                        <textarea type="text" class="form-control" name="txt_opcao4" aria-label="Colocar texto na primeira opção" required></textarea>
+                    </div>
+                    <button type="submit" value="SAVE" class="btn btn-outline-secondary mt-2 float-right">Cadastrar pergunta</button>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </form>
+    </section>
+{% endblock %}
