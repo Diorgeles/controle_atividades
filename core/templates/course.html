@@ -5,23 +5,7 @@
 {% block insert_title %}Cadastrar curso{% endblock insert_title %}
 
 {% block menu %}
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <!-- Brand -->
-        <a class="navbar-brand" href="#">Ftceiraidade</a>
-
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-
-                <a class="nav-item nav-link" href="{% url 'courses' %}">Cursos</a>
-                <a class="nav-item nav-link" href="{% url 'activities' %}"
-                >Atividades</a
-                >
-            </div>
-        </div>
-        {% if user.is_authenticated %}
-            <a class="nav-item nav-link disabled text-white mr-5" href="#"> Bem Vindo(a) {{ request.user }}</a>
-        {% endif %}
-    </nav>
+{% include 'core/menu.html' %}
 {% endblock %}
 
 {% block insert_data %}

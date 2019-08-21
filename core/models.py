@@ -44,6 +44,7 @@ class Course(SoftDeletableModel, TimeStampedModel):
     students = models.ManyToManyField(
         Students, verbose_name='Estudantes', blank=True)
     name = models.CharField('Nome', max_length=100)
+    tag = models.CharField('Abreviação', max_length=10, null=True, blank=True)
     period = models.CharField('Período', max_length=50, choices=PERIOD_TYPE)
 
     class Meta:
