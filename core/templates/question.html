@@ -1,0 +1,66 @@
+{% extends "base_add_list.html" %}
+{% load bootstrap %}
+
+{% block insert_title %}Cadastrar questões{% endblock insert_title %}
+
+{% block menu %}
+{% include 'core/menu.html' %}
+{% endblock %}
+
+{% block insert_data %}
+<form action="{% url 'questions' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="activity">Selecione a materia</label>
+        <select class="form-control" name="activity" id="activity">
+            <option value=""></option>
+            {% for activity in activities %}
+            <option value="{{ activity.id }}">{{activity.course.tag}} - {{ activity.name }} </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="question">Questão</label>
+        <textarea class="form-control" name="question"></textarea>
+    </div>
+    <div class="form-row">
+        <div class="col-8">
+            <label for="response">Resposta Correta</label>
+            <input type="text" class="form-control" aria-label="Text input with radio button" name="response">
+        </div>
+        <div class="col-2">
+            <label for="response">Letra Correta</label>
+            <select name="correct_alternative" id="correct_alternative" class="form-control">
+                <option value=""></option>
+                <option value="a">A</option>
+                <option value="b">B</option>
+                <option value="c">C</option>
+                <option value="d">D</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <label for="value_question">Valor da resposta</label>
+            <input type="number" name="value_question" id="value_question" class="form-control">
+        </div>
+    </div>
+    <div class="form-row mt-3">
+        <div class="col-12">
+            <label for="response">Respostas incorretas</label>
+            <div class="form-group">
+                <input type="text" class="form-control" aria-label="Text input with radio button" name="wrong_response">
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <input type="text" class="form-control" aria-label="Text input with radio button" name="wrong_response">
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <input type="text" class="form-control" aria-label="Text input with radio button" name="wrong_response">
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" name='SAVE'>Salvar</button>
+</form>
+{% endblock insert_data %}

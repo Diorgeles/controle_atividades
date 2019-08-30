@@ -3,7 +3,7 @@ from django.contrib.auth import login
 
 from .views import (home, courses,
                     course, activity, activities,
-                    register_student)
+                    register_student, questions)
 
 urlpatterns = [
     path('', home, name='core_home'),
@@ -12,4 +12,5 @@ urlpatterns = [
     path('atividades', activities, name='activities'),
     path('atividades/<int:activityId>', activity, name='activity'),
     path('cadastro_aluno', register_student, name='register_student'),
+    path('questoes', questions, name='questions')
 ]
